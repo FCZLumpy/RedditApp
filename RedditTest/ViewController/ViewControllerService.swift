@@ -9,15 +9,27 @@
 import Foundation
 
 class ViewControllerService {
-    func connect(callback: (Bool) -> Void) {
-        print("connect")
-        callback(true)
+    func connect(callback: @escaping([PostData]) -> Void) {
+        guard let url = URL(string: ViewControllerConsts.redditURL) else { return }
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { return }
+            do {
+                let decoder = JSONDecoder()
+                let topData = try decoder.decode(TopData.self, from: data)
+                callback(topData.topData?.children ?? [])
+            } catch {
+                callback([])
+                print("json error: \(error)")
+            }
+        }
+        
+        task.resume()
     }
     
     func reloadData(callback: (Bool) -> Void) {
         print("reload data")
         callback(true)
     }
-    
-    
 }
+
+

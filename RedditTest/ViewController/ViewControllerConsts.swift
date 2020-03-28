@@ -9,5 +9,5 @@
 import Foundation
 
 struct ViewControllerConsts {
-    static let redditURL = "reddit.com"
+    static let redditURL = "https://www.reddit.com/top.json"
 }

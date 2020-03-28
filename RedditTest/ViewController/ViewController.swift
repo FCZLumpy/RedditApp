@@ -23,8 +23,8 @@ class ViewController: UIViewController  {
 }
 
 extension ViewController: ViewControllerDelegates {
-    func connect() {
-        print("connected")
+    func connect(_ posts: [PostData]) {
+        print(posts)
     }
     
     func reloadData() {

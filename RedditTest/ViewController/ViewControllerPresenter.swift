@@ -22,7 +22,7 @@ class ViewControllerPresenter {
     
     func connect() {
         viewControllerService.connect() { value in
-            viewControllerDelegates?.connect()
+            self.viewControllerDelegates?.connect(value)
         }
     }
     

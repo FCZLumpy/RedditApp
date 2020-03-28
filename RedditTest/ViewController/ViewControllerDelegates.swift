@@ -9,6 +9,6 @@
 import Foundation
 
 protocol ViewControllerDelegates: NSObjectProtocol {
-    func connect()
+    func connect(_ posts: [PostData])
     func reloadData()
 }
