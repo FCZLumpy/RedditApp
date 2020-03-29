@@ -12,13 +12,17 @@ struct SinglePost {
     let authorName: String?
     let title: String?
     let thumbnailURL: URL?
+    let created: Int?
+    let commentsCount: Int?
 }
 
 extension SinglePost: Decodable {
     enum SinglePostKeys: String, CodingKey {
-        case authorName = "author_fullname"
+        case authorName = "author"
         case title
         case thumbnailURL = "thumbnail"
+        case created
+        case commentsCount = "num_comments"
     }
     
     init(from decoder: Decoder) throws {
@@ -27,6 +31,8 @@ extension SinglePost: Decodable {
         title = try container.decode(String.self, forKey: .title)
         let thumbnail = try container.decode(String.self, forKey: .thumbnailURL)
         thumbnailURL = URL(string: thumbnail)
+        created = try container.decode(Int.self, forKey: .created)
+        commentsCount = try container.decode(Int.self, forKey: .commentsCount)
     }
 }
 

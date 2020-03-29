@@ -10,4 +10,5 @@ import Foundation
 
 struct ViewControllerConsts {
     static let redditURL = "https://www.reddit.com/top.json"
+    static let cell = "ViewControllerCell"
 }
