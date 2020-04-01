@@ -26,6 +26,12 @@ class ViewControllerPresenter {
         }
     }
     
+    func loadFromCoreData() {
+        viewControllerService.loadFromCoreData() { value in
+            self.viewControllerDelegates?.loadFromCoreData(value)
+        }
+    }
+    
     func reloadData()  {
         viewControllerService.reloadData() { value in
             viewControllerDelegates?.reloadData()

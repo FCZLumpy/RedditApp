@@ -9,11 +9,11 @@
 import Foundation
 
 struct SinglePost {
-    let authorName: String?
-    let title: String?
-    let thumbnailURL: URL?
-    let created: Int?
-    let commentsCount: Int?
+    let authorName: String
+    let title: String
+    let thumbnailURL: String
+    let created: Int
+    let commentsCount: Int
 }
 
 extension SinglePost: Decodable {
@@ -27,17 +27,16 @@ extension SinglePost: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: SinglePostKeys.self)
-        authorName = try container.decodeIfPresent(String.self, forKey: .authorName)
+        authorName = try container.decode(String.self, forKey: .authorName)
         title = try container.decode(String.self, forKey: .title)
-        let thumbnail = try container.decode(String.self, forKey: .thumbnailURL)
-        thumbnailURL = URL(string: thumbnail)
+        thumbnailURL = try container.decode(String.self, forKey: .thumbnailURL)
         created = try container.decode(Int.self, forKey: .created)
         commentsCount = try container.decode(Int.self, forKey: .commentsCount)
     }
 }
 
 struct PostData {
-    let data: SinglePost?
+    let data: SinglePost
 }
 
 extension PostData: Decodable {
@@ -52,7 +51,7 @@ extension PostData: Decodable {
 }
 
 struct Children {
-    let children: [PostData]?
+    let children: [PostData]
     let dist: Int
 }
 
@@ -70,7 +69,7 @@ extension Children: Decodable {
 }
 
 struct TopData {
-    let topData: Children?
+    let topData: Children
     let kind: String
 }
 

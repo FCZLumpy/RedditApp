@@ -11,4 +11,11 @@ import Foundation
 struct ViewControllerConsts {
     static let redditURL = "https://www.reddit.com/top.json"
     static let cell = "ViewControllerCell"
+    static let singlePost = "SinglePostEntity"
+    
+    static let authorName = "authorName"
+    static let commentsCount = "commentsCount"
+    static let created = "created"
+    static let title = "title"
+    static let thumbnailURL = "thumbnailURL"
 }

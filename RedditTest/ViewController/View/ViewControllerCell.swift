@@ -14,12 +14,12 @@ class ViewControllerCell: UITableViewCell {
     @IBOutlet weak var ivImage: UIImageView!
     @IBOutlet weak var tlComments: UILabel!
     
-    public func congigure(_ post: PostData) {
-        tlTitle.text = post.data?.title
-        let date = convertDate(post.data?.created)
-        tlAuthor.text = "\(post.data?.authorName ?? "") \(date)"
-        ivImage.image = loadImage(post.data?.thumbnailURL)
-        tlComments.text = "\(post.data?.commentsCount ?? 0) comments"
+    public func congigure(_ post: SinglePost, _ index: Int) {
+        tlTitle.text = "\(index)"    //post.data?.title
+        let date = convertDate(post.created)
+        tlAuthor.text = "\(post.authorName) \(date)"
+        ivImage.image = loadImage(URL(string: post.thumbnailURL))
+        tlComments.text = "\(post.commentsCount) comments"
     }
     
     private func convertDate(_ date: Int?) -> String {
