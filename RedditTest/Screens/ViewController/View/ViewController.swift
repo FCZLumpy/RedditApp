@@ -12,6 +12,7 @@ class ViewController: UIViewController  {
     
     @IBOutlet weak var tableView: UITableView!
     lazy var refreshControl = UIRefreshControl()
+    private var isFetchingNextPage = false
     
     var posts = [SinglePost]()
     private let viewControllerPresenter = ViewControllerPresenter(viewControllerService: ViewControllerService())
@@ -23,8 +24,8 @@ class ViewController: UIViewController  {
         tableView.addSubview(refreshControl)
 
         viewControllerPresenter.setViewDelegate(viewControllerDelegates: self)
-        viewControllerPresenter.loadFromCoreData()
-        viewControllerPresenter.connect()
+     //   viewControllerPresenter.loadFromCoreData()
+        viewControllerPresenter.loadNextPage(0)  //connect()
     }
     
     @objc func refresh(sender:AnyObject)
@@ -33,9 +34,22 @@ class ViewController: UIViewController  {
         
         refreshControl.endRefreshing()
     }
+    
+    private func fetchNextPage() {
+        guard !isFetchingNextPage else { return }
+        viewControllerPresenter.loadNextPage(posts.count)
+    }
 }
 
 extension ViewController: ViewControllerDelegates {
+    func loadNextPage(_ posts: [SinglePost]) {
+        isFetchingNextPage = false
+        self.posts = posts
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     func loadFromCoreData(_ posts: [SinglePost]) {
         self.posts = posts
         DispatchQueue.main.async {
@@ -73,6 +87,12 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         print("prefetchRowsAt \(indexPaths)")
+        let needsFetch = indexPaths.contains { $0.row >= self.posts.count - 1 }
+        if needsFetch {
+            fetchNextPage()
+        }
+        
+      //  tableView.reloadData
     }
 
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {

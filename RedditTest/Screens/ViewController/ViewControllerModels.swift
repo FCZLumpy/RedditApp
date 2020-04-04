@@ -14,6 +14,7 @@ struct SinglePost {
     let thumbnailURL: String
     let created: Int
     let commentsCount: Int
+    let name: String
 }
 
 extension SinglePost: Decodable {
@@ -23,6 +24,7 @@ extension SinglePost: Decodable {
         case thumbnailURL = "thumbnail"
         case created
         case commentsCount = "num_comments"
+        case name
     }
     
     init(from decoder: Decoder) throws {
@@ -32,6 +34,7 @@ extension SinglePost: Decodable {
         thumbnailURL = try container.decode(String.self, forKey: .thumbnailURL)
         created = try container.decode(Int.self, forKey: .created)
         commentsCount = try container.decode(Int.self, forKey: .commentsCount)
+        name = try container.decode(String.self, forKey: .name)
     }
 }
 
