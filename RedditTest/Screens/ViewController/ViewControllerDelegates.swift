@@ -9,8 +9,7 @@
 import Foundation
 
 protocol ViewControllerDelegates: NSObjectProtocol {
-    func connect(_ posts: [SinglePost])
     func loadFromCoreData(_ posts: [SinglePost])
-    func reloadData()
+    func reloadData(_ posts: [SinglePost])
     func loadNextPage(_ posts: [SinglePost])
 }

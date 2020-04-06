@@ -20,12 +20,6 @@ class ViewControllerPresenter {
         self.viewControllerDelegates = viewControllerDelegates
     }
     
-   /* func connect() {
-        viewControllerService.connect() { value in
-            self.viewControllerDelegates?.connect(value)
-        }
-    } */
-    
     func loadFromCoreData() {
         viewControllerService.loadFromCoreData() { value in
             self.viewControllerDelegates?.loadFromCoreData(value)
@@ -34,12 +28,12 @@ class ViewControllerPresenter {
     
     func reloadData()  {
         viewControllerService.reloadData() { value in
-            viewControllerDelegates?.reloadData()
+            self.viewControllerDelegates?.reloadData(value)
         }
     }
     
-    func loadNextPage(_ lastIndex: Int) {
-        viewControllerService.loadNextPage(lastIndex) { value in
+    func loadNextPage() {
+        viewControllerService.loadNextPage() { value in
             self.viewControllerDelegates?.loadNextPage(value)
         }
     }

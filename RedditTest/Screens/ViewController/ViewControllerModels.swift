@@ -6,8 +6,7 @@
 //  Copyright © 2020 Oleksandr Balytskyi. All rights reserved.
 //
 
-import Foundation
-
+// Single Post
 struct SinglePost {
     let authorName: String
     let title: String
@@ -15,6 +14,7 @@ struct SinglePost {
     let created: Int
     let commentsCount: Int
     let name: String
+    let imageURL: String
 }
 
 extension SinglePost: Decodable {
@@ -25,6 +25,8 @@ extension SinglePost: Decodable {
         case created
         case commentsCount = "num_comments"
         case name
+        case imageURL = "url"
+        case preview
     }
     
     init(from decoder: Decoder) throws {
@@ -35,9 +37,62 @@ extension SinglePost: Decodable {
         created = try container.decode(Int.self, forKey: .created)
         commentsCount = try container.decode(Int.self, forKey: .commentsCount)
         name = try container.decode(String.self, forKey: .name)
+        imageURL = try container.decode(String.self, forKey: .thumbnailURL)
+        //Here should be imageURL from preview, but I dont know why I receive 403 in app and in Safary
+      /*  let image = try container.decode(Preview.self, forKey: .preview)
+        imageURL = image.images.first?.source.url ?? "" */
     }
 }
 
+// Decode preview
+struct Preview {
+    let images : [Source]
+}
+
+extension Preview: Decodable {
+    enum PreviewKeys: String, CodingKey {
+        case images
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: PreviewKeys.self)
+        images = try container.decode([Source].self, forKey: .images)
+    }
+}
+
+// Decode preview
+struct Source {
+    let source : PreviewUrl
+}
+
+extension Source: Decodable {
+    enum SourceKeys: String, CodingKey {
+        case source
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: SourceKeys.self)
+        source = try container.decode(PreviewUrl.self, forKey: .source)
+    }
+}
+
+// Decode url
+struct PreviewUrl {
+    let url : String
+}
+
+extension PreviewUrl: Decodable {
+    enum PreviewUrlKeys: String, CodingKey {
+        case url
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: PreviewUrlKeys.self)
+        url = try container.decode(String.self, forKey: .url)
+    }
+}
+
+// Single Post from Data
 struct PostData {
     let data: SinglePost
 }
@@ -53,38 +108,34 @@ extension PostData: Decodable {
     }
 }
 
+// Posts List
 struct Children {
     let children: [PostData]
-    let dist: Int
 }
 
 extension Children: Decodable {
     enum ChildrenKeys: String, CodingKey {
         case children
-        case dist
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ChildrenKeys.self)
         children = try container.decode([PostData].self, forKey: .children)
-        dist = try container.decode(Int.self, forKey: .dist)
     }
 }
 
+// All data
 struct TopData {
     let topData: Children
-    let kind: String
 }
 
 extension TopData: Decodable {
     enum TopDataKeys: String, CodingKey {
         case topData = "data"
-        case kind
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: TopDataKeys.self)
         topData = try container.decode(Children.self, forKey: .topData)
-        kind = try container.decode(String.self, forKey: .kind)
     }
 }
