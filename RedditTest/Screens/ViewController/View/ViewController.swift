@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  RedditTest
-//
-//  Created by Oleksandr Balytskyi on 27.03.2020.
-//  Copyright © 2020 Oleksandr Balytskyi. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController  {
@@ -29,17 +21,17 @@ class ViewController: UIViewController  {
         viewControllerPresenter.loadNextPage()
     }
     
-    @objc func refresh(sender:AnyObject)
-    {
-        viewControllerPresenter.reloadData()
-        refreshControl.endRefreshing()
-    }
-    
     private func setupUI() {
         tableView.tableFooterView = UIView()
         refreshControl.addTarget(nil, action: #selector(refresh), for: UIControl.Event.valueChanged)
         tableView.addSubview(refreshControl)
         spinner.startAnimating()
+    }
+    
+    @objc func refresh(sender:AnyObject)
+    {
+        viewControllerPresenter.reloadData()
+        refreshControl.endRefreshing()
     }
     
     private func fetchNextPage() {
@@ -128,4 +120,3 @@ extension ViewController: UITableViewDataSourcePrefetching {
         }
     }
 }
-

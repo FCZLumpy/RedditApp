@@ -1,11 +1,3 @@
-//
-//  ViewControllerCell.swift
-//  RedditTest
-//
-//  Created by Elina Balytska on 29.03.2020.
-//  Copyright © 2020 Oleksandr Balytskyi. All rights reserved.
-//
-
 import UIKit
 
 class ViewControllerCell: UITableViewCell {
@@ -20,7 +12,7 @@ class ViewControllerCell: UITableViewCell {
         tlTitle.text = post.title
         let date = convertDate(post.created)
         tlAuthor.text = "\(post.authorName) \(date)"
-        ivImage.image = loadImage(URL(string: post.thumbnailURL))
+        ivImage.loadImageUsingCache(post.thumbnailURL)
         tlComments.text = "\(post.commentsCount) comments"
         
         let tap = GestureRecognizerWithParam(target: self, action: #selector(tapHandler))
@@ -64,11 +56,6 @@ class ViewControllerCell: UITableViewCell {
         let relativeDate = formatter.localizedString(for: date, relativeTo: Date())
         
         return relativeDate
-    }
-    
-    private func loadImage(_ url: URL?) -> UIImage? {
-        guard let url = url, let data = try? Data(contentsOf: url) else  { return nil }
-        return UIImage(data: data)
     }
     
     private func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {

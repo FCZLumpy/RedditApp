@@ -22,6 +22,7 @@
 		0BAA1B4A242E5D1B00C0A8CA /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA1B49242E5D1B00C0A8CA /* ViewControllerPresenter.swift */; };
 		0BAA1B4C242E5D4500C0A8CA /* ViewControllerConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA1B4B242E5D4500C0A8CA /* ViewControllerConsts.swift */; };
 		AE262E90243A46880030FB67 /* GestureRecognizerWithParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE262E8F243A46880030FB67 /* GestureRecognizerWithParam.swift */; };
+		AE7150E5251A3F0C0066F087 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7150E4251A3F0C0066F087 /* CacheManager.swift */; };
 		AEE38B8E2430E79700976DDE /* ViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE38B8D2430E79700976DDE /* ViewControllerCell.swift */; };
 		AEE38B90243125E500976DDE /* UITableview+AnimatedReload.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE38B8F243125E500976DDE /* UITableview+AnimatedReload.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		0BAA1B49242E5D1B00C0A8CA /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
 		0BAA1B4B242E5D4500C0A8CA /* ViewControllerConsts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerConsts.swift; sourceTree = "<group>"; };
 		AE262E8F243A46880030FB67 /* GestureRecognizerWithParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizerWithParam.swift; sourceTree = "<group>"; };
+		AE7150E4251A3F0C0066F087 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		AEE38B8D2430E79700976DDE /* ViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCell.swift; sourceTree = "<group>"; };
 		AEE38B8F243125E500976DDE /* UITableview+AnimatedReload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableview+AnimatedReload.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,9 +119,8 @@
 		0BAA1B0E242E585C00C0A8CA /* RedditTest */ = {
 			isa = PBXGroup;
 			children = (
+				AE1D6C342519079100803D80 /* AppSceneDelegate */,
 				AEE38B932435363C00976DDE /* Screens */,
-				0BAA1B0F242E585C00C0A8CA /* AppDelegate.swift */,
-				0BAA1B11242E585C00C0A8CA /* SceneDelegate.swift */,
 				0BAA1B15242E585C00C0A8CA /* Main.storyboard */,
 				AEE38B922435360900976DDE /* Managers */,
 				AEE38B91243125F700976DDE /* Extensions */,
@@ -162,6 +163,15 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		AE1D6C342519079100803D80 /* AppSceneDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				0BAA1B11242E585C00C0A8CA /* SceneDelegate.swift */,
+				0BAA1B0F242E585C00C0A8CA /* AppDelegate.swift */,
+			);
+			path = AppSceneDelegate;
+			sourceTree = "<group>";
+		};
 		AEE38B8C2430E76F00976DDE /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				AE262E8F243A46880030FB67 /* GestureRecognizerWithParam.swift */,
+				AE7150E4251A3F0C0066F087 /* CacheManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -326,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE7150E5251A3F0C0066F087 /* CacheManager.swift in Sources */,
 				0BAA1B48242E5CB400C0A8CA /* ViewControllerDelegates.swift in Sources */,
 				0BAA1B46242E5C8400C0A8CA /* ViewControllerModels.swift in Sources */,
 				0BAA1B14242E585C00C0A8CA /* ViewController.swift in Sources */,
